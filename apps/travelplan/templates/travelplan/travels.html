@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Main></title>
+</head>
+<body>
+    <h1> Hello, {{ user.name }}!</h1>
+    {% if messages %} 
+        {% for message in messages %}
+            <h2>{{ message }}</h2>
+        {% endfor %} 
+    {% endif %} 
+    <a href='/travelplan/logout'>Logout</a>
+
+    <h2>Your Trip Schedules</h2>
+    <table style='border:1px solid black'>
+        <tr>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+        </tr>
+        {% for trip in owntrips %}
+            <tr>
+                <td><a href='/travelplan/destination/{{trip.id}}'>{{trip.destination}}</a></td>
+                <td>{{trip.traveldatefrom}}</td>
+                <td>{{trip.traveldateto}}</td>
+                <td>{{trip.description}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>Other User's Travel Plans</h2>
+    <table style='border:1px solid black'>
+        <tr>
+            <th>Name</th>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Do You Want to Join?</th>
+        </tr>
+        {% for trip in othertrips %}
+            <tr>
+                <td>{{trip.tripcreater.name}}</td>
+                <td><a href='/travelplan/destination/{{trip.id}}'>{{trip.destination}}</a></td>
+                <td>{{trip.traveldatefrom}}</td>
+                <td>{{trip.traveldateto}}</td>
+                <td><a href='/travelplan/join/{{trip.id}}'>Join</a></td>
+            <tr>
+        {% endfor %}
+    </table>
+    <a href='/travelplan/travels/add'>Add Travel Plan</a>
+</body>
+</html>

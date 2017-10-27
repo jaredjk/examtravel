@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Index</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <h2>{{ message }}</h2>
+        {% endfor %}
+    {% endif %}
+    <h2>Welcome!</h2>
+    <form action='travelplan/register' method='POST'>
+        {% csrf_token %}
+        <fieldset>
+            <legend>Registration</legend>
+            <p>Name: <input type='text' name='name'></p>
+            <p>Username: <input type='text' name='username'></p>
+            <p>Password: <input type='password' name='password'></p>
+            *Password should be at least 8 characters
+            <p>Confirm Password: <input type='password' name='confirm_password'></p>
+            <input type='submit' value='Register'>
+        </fieldset>
+    </form>
+    <form action='travelplan/login' method='POST'>
+        {% csrf_token %}
+        <fieldset>
+            <legend>Login</legend>
+            <p>Username: <input type='text' name='username'></p>
+            <p>Password: <input type='password' name='password'></p>
+            <input type='submit' value='Login'>
+        </fieldset>
+    </form>
+</body>
+</html>
